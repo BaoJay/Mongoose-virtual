@@ -23,4 +23,15 @@ personSchema.virtual("fullName").get(function () {
   return `${this.first} ${this.last}`;
 });
 
+// Define a pre-async-middleware for Schema
+personSchema.pre("save", async function () {
+  this.first = "YO";
+  this.last = "Mama";
+  console.log("About to save!!!");
+});
+// Define a post-async-middleware for Schema
+personSchema.post("save", async function () {
+  console.log("Just saved!!!!!!!!");
+});
+
 const Person = mongoose.model("Person", personSchema);
